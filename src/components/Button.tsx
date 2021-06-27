@@ -1,14 +1,17 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+  Text,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 
-export const Button = ({ children, onPress, disabled, ...rest }) => (
-  <TouchableOpacity
-    style={styles.container}
-    activeOpacity={0.7}
-    onPress={onPress}
-    disabled={disabled}
-    {...rest}
-  >
+export const Button: React.FC<TouchableOpacityProps> = ({
+  children,
+  ...rest
+}) => (
+  <TouchableOpacity style={styles.container} activeOpacity={0.7} {...rest}>
     <Text style={styles.text}>{children}</Text>
   </TouchableOpacity>
 );

@@ -1,7 +1,11 @@
 import React from 'react';
-import { TextInput, StyleSheet, Platform } from 'react-native';
+import { TextInput, StyleSheet, Platform, TextInputProps } from 'react-native';
 
-export const Input = ({ value, placeholder, ...rest }) => (
+export const Input: React.FC<TextInputProps> = ({
+  value,
+  placeholder,
+  ...rest
+}) => (
   <TextInput
     style={styles.input}
     placeholder={placeholder}

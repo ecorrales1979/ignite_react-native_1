@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 
-export const SkillCard = ({ skill }) => (
+interface SkillCardProps {
+  skill: string;
+}
+
+export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => (
   <View style={styles.container}>
     <Text style={styles.text}>{skill}</Text>
   </View>

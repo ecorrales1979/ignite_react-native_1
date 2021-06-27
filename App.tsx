@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 
 import { Home } from './src/pages/Home';
 
-export const App = () => {
+export const App: React.FC = () => {
   return (
     <>
       <Home />

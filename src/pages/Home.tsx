@@ -6,9 +6,14 @@ import { Input } from '../components/Input';
 import { Title } from '../components/Title';
 import { SkillCard } from '../components/SkillCard';
 
-export const Home = () => {
+interface SkillData {
+  id: string;
+  name: string;
+}
+
+export const Home: React.FC = () => {
   const [newSkill, setNewSkill] = useState('');
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState<SkillData[]>([]);
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
@@ -25,7 +30,12 @@ export const Home = () => {
 
   const handleAddSkill = useCallback(() => {
     if (newSkill) {
-      setSkills(oldState => [...oldState, newSkill]);
+      const data: SkillData = {
+        id: String(new Date().getTime()),
+        name: newSkill,
+      };
+
+      setSkills(oldState => [...oldState, data]);
       setNewSkill('');
     }
   }, [newSkill]);
@@ -53,8 +63,8 @@ export const Home = () => {
       ) : (
         <FlatList
           data={skills}
-          keyExtractor={item => item}
-          renderItem={({ item }) => <SkillCard skill={item} />}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => <SkillCard skill={item.name} />}
           showsVerticalScrollIndicator={false}
           style={styles.stretched}
         />
