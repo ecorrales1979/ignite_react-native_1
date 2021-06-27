@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import { StyleSheet, SafeAreaView, FlatList, Text } from 'react-native';
 
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
@@ -45,13 +45,20 @@ export const Home = () => {
       </Button>
 
       <Title title="My skills" />
-      <FlatList
-        data={skills}
-        keyExtractor={item => item}
-        renderItem={({ item }) => <SkillCard skill={item} />}
-        showsVerticalScrollIndicator={false}
-        style={styles.stretched}
-      />
+      {skills.length === 0 ? (
+        <Text style={styles.text}>
+          You don't have any skill yet. Enter a new skill and press the "Add"
+          button
+        </Text>
+      ) : (
+        <FlatList
+          data={skills}
+          keyExtractor={item => item}
+          renderItem={({ item }) => <SkillCard skill={item} />}
+          showsVerticalScrollIndicator={false}
+          style={styles.stretched}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -62,6 +69,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#121015',
     paddingHorizontal: 20,
+  },
+  text: {
+    color: '#ddd',
   },
   stretched: {
     alignSelf: 'stretch',
