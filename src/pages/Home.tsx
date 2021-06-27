@@ -4,12 +4,7 @@ import { StyleSheet, SafeAreaView, FlatList, Text } from 'react-native';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Title } from '../components/Title';
-import { SkillCard } from '../components/SkillCard';
-
-interface SkillData {
-  id: string;
-  name: string;
-}
+import { SkillCard, SkillData } from '../components/SkillCard';
 
 export const Home: React.FC = () => {
   const [newSkill, setNewSkill] = useState('');
@@ -40,6 +35,10 @@ export const Home: React.FC = () => {
     }
   }, [newSkill]);
 
+  const handleRemoveSkill = useCallback((id: string) => {
+    setSkills(oldState => oldState.filter(item => item.id !== id));
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <Title title="Welcome" subtitle={greeting} />
@@ -64,7 +63,9 @@ export const Home: React.FC = () => {
         <FlatList
           data={skills}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => <SkillCard skill={item.name} />}
+          renderItem={({ item }) => (
+            <SkillCard skill={item} remove={handleRemoveSkill} />
+          )}
           showsVerticalScrollIndicator={false}
           style={styles.stretched}
         />
