@@ -1,5 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, FlatList, Text } from 'react-native';
+import {
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  Text,
+  Keyboard,
+} from 'react-native';
 
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
@@ -32,6 +38,7 @@ export const Home: React.FC = () => {
 
       setSkills(oldState => [...oldState, data]);
       setNewSkill('');
+      Keyboard.dismiss();
     }
   }, [newSkill]);
 
